@@ -28,7 +28,7 @@ int main(int argc, char** argv)
     //the range is from 1% to 5%, so the formula we use is: (1 + i*4/n)%
     vector<double> percents; 
     for(double i = 0; i < P; i++)
-        percents.push_back(1 + i / P * 5);
+        percents.push_back(1 + i / P * 4);
     //vector<double> percents = {0.5};
 
 
