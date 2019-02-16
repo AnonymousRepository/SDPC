@@ -35,7 +35,7 @@ Clustering results of each trial will be stored in _Result_ folder and decision 
 
 Clustering results have only one column which is the cluster # of the data point, the order of data point is the same as that in the dataset.
 
-Decision graphs are organized as two columns: 1st column is the $\rho$ while 2nd column is the $\delta$. It's easy to two generate graph based on this file. Users are free to use any other library or software to generate the plots. I just give an example using _gnuplot_. (Assume the decision graph file is _DecisionGraph.1.dat_)
+Decision graphs are organized as two columns: 1st column is the ρ while 2nd column is the δ. It's easy to two generate graph based on this file. Users are free to use any other library or software to generate the plots. I just give an example using _gnuplot_. (Assume the decision graph file is _DecisionGraph.1.dat_)
 
 ```Bash
 gnuplot -e 'plot "DecisionGraph/DecisionGraph.1.dat" with point pt 7; pause -1'
