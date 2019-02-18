@@ -43,9 +43,3 @@ gnuplot -e 'plot "DecisionGraph/DecisionGraph.1.dat" with point pt 7; pause -1'
 
 ## Reference
 [1] Rodriguez, A. and Laio, A., 2014. Clustering by fast search and find of density peaks. Science, 344(6191), pp.1492-1496.
-
-
-
-git filter-branch -f --env-filter \
-"GIT_AUTHOR_NAME='XA16'; GIT_AUTHOR_EMAIL='XA@XA.com'; \
-GIT_COMMITTER_NAME='YMYTZSQF'; GIT_COMMITTER_EMAIL='syang16@ncsu.edu';" HEAD
