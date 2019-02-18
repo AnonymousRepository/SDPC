@@ -1,6 +1,6 @@
 //DPC Express implementation. DPC Express is a fast drop-in replacement of\
 Density Peak Clustering via redundancy removal in Tuning\
-@Copyright:© 2018 Shuai Yang
+
 #include "DPC.h"
 
 DPC::DPC(int n)

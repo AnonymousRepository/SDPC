@@ -46,4 +46,6 @@ gnuplot -e 'plot "DecisionGraph/DecisionGraph.1.dat" with point pt 7; pause -1'
 
 
 
-
+git filter-branch -f --env-filter \
+"GIT_AUTHOR_NAME='XA16'; GIT_AUTHOR_EMAIL='XA@XA.com'; \
+GIT_COMMITTER_NAME='YMYTZSQF'; GIT_COMMITTER_EMAIL='syang16@ncsu.edu';" HEAD
