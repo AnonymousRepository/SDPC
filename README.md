@@ -5,7 +5,7 @@
 # DPC-Express
 This is an implementation of DPC Express, which is an optimization algorithm for Density Peack Clustering (DPC) algorithm<sup>1</sup>. It accelerates DPC during tuning by removing redundant calculations while it preserves the same output as DPC. The details about DPC Express are described in the paper:
 
-DPC Express: A Fast Drop-in Replacement of Density Peak Clustering via Redundancy Removal in Tuning
+Lower the Final Barrier: Optimizing Hyperparameter Tuning for Density Peak Clustering
 
 Organization of the repo:
 
@@ -13,8 +13,9 @@ Organization of the repo:
 * [DPC.h] - The header file for DPC Express
 * [main.cpp] - Sample test file for DPC Express
 * [Data] - Datasets as well as codes to convert vector-based dataset to DPC-compatible input
+* [Original] - source files for original DPC
 
-More descriptions about the _Data_ folder please refer to the _readme_ in it.
+More descriptions about the _Data_ folder and the _Original_ folder please refer to the _readme_ in them.
 
 ## Compile DPC Express
 ```Bash
