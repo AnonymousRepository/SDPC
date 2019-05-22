@@ -2,7 +2,7 @@
   <img src="SDPC_logo.png" alt="drawing" width="320" />
 </p>
 
-# DPC-Express
+# SDPC
 This is an implementation of SDPC, which is an optimization algorithm for Density Peack Clustering (DPC) algorithm<sup>1</sup>. It consistently accelerates DPC during tuning by removing redundant calculations and reduces memory consumption via stream-style data process. In the meanwhile, it preserves the same semantic of DPC and thus the same output as DPC does. The details about SDPC are described in the paper:
 
 Streamline Density Peak Clustering for Practical Adoptions
