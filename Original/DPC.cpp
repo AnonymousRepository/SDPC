@@ -47,6 +47,9 @@ void DPC::findHalo()
             cout<<i<<endl;
         cout<<endl<<endl;
     }
+    /* for(auto i : halo)
+        cout<<i<<" ";
+    cout<<endl; */
 }
 
 void DPC::assignation()
@@ -114,10 +117,6 @@ void DPC::calDelta()
     }
 
     delta[ordrho[0]] = maxDelta;
-    
-    /*for(auto i : delta)
-        cout<<i<<endl;
-    cout<<endl<<endl<<endl<<"xxxxx";*/
 }
 
 void DPC::sortRho()
@@ -147,23 +146,11 @@ void DPC::gaussKernel()
     }
 }
 
-bool flag3  = true;
 void DPC::cutOffKernel()
 {
-    if(flag3)
-    {
-        timespec t_start, t_end;
-	    clock_gettime(CLOCK_MONOTONIC, &t_start);
-        sort(dist2.begin(), dist2.end());
-        flag3 = false;
-        clock_gettime(CLOCK_MONOTONIC, &t_end);
-	    long timedif = 1000000*(t_end.tv_sec-t_start.tv_sec)+(t_end.tv_nsec-t_start.tv_nsec)/1000;
-        printf("Dc took %lf ms\n", timedif / 1000.0);
-    }
     int position = round(percent / 100.0 * dist2.size());
-    
     dc = *(dist2.begin() + position);
-
+    //cout<<"dc:"<<dc<<endl;
     rho = vector<double>(N, 0);
 
     for(int i = 0; i < N - 1; i++)
@@ -177,9 +164,6 @@ void DPC::cutOffKernel()
             }
         }
     }
-    /*for(auto i:rho)
-        cout<<i<<endl;
-    cout<<endl<<"rrrr"<<endl;*/
 }
 
 void DPC::calRho(bool isGaussKernel)
@@ -203,6 +187,7 @@ void DPC::readDist(string fileName)
         dist[i2 - 1][i1 - 1] = dist[i1 - 1][i2 - 1];
         dist2.push_back(dist[i2 - 1][i1 - 1]);
     }
+    sort(dist2.begin(), dist2.end());
 }
 
 void DPC::setPercent(double Pct)

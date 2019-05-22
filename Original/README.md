@@ -17,7 +17,7 @@ make
 ## Run DPC
 ```Bash
 ./DPC data-file number-of-data-point number-of-clusters number-of-dc output-clustering-results: True or False
-(e.g. ./DPC ../Data/elliptical_10_2.data 500 10 8 False)
+(e.g. ./DPC ../Data/elliptical_10_2.rawData.data 500 10 8 False)
 ```
 
 

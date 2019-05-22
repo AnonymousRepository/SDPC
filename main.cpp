@@ -6,23 +6,22 @@
 #include "DPC.h"
 
 using namespace std;
+extern int num_recomp, num_remain;
 
 int main(int argc, char** argv)
 {
-    if(argc != 7)
+    if(argc != 9)
     {
-        cout<<"Error! Usage: ./DPC [filename] [number of data points] [number of clusters] [number of dc] [output clustering results: True or False] [output decision graphs: True or False]"<<endl;
+        cout<<"Error! Usage: ./DPC [filename of distances] [number of data points] [number of clusters] [number of dc] [output clustering results: True or False] [output decision graphs: True or False] [fileName of data points] [number of dimensions]"<<endl;
         return 0;
     }
     //parse input parameters
     string file(argv[1]);
+    string file2(argv[7]);
     int N = atoi(argv[2]);
     int K = atoi(argv[3]);
     int P = atoi(argv[4]);
-
-    DPC dpc(N);
-    dpc.readDist(file);
-    dpc.setK(K); //set the number of clusters
+    int dim = atoi(argv[8]);
 
     //set percentages of average number of neighbors compared with all data points
     //the range is from 1% to 5%, so the formula we use is: (1 + i*4/n)%
@@ -30,7 +29,6 @@ int main(int argc, char** argv)
     for(double i = 0; i < P; i++)
         percents.push_back(1 + i / P * 4);
     //vector<double> percents = {0.5};
-
 
     timespec t_start, t_end;                       //for the measurement of total running time
     timespec t_startDc, t_endDc;                   //for the measurement of time spent on getting Dc
@@ -40,9 +38,14 @@ int main(int argc, char** argv)
     long timeTotal = 0, timeDc = 0, timeRhoDelta = 0, timeHalo = 0;
 	
     clock_gettime(CLOCK_MONOTONIC, &t_start);
+
+    DPC dpc(N);
+    dpc.setDim(dim);
+    clock_gettime(CLOCK_MONOTONIC, &t_startDc);
+    dpc.readDist(file, 5, file2);
+    dpc.setK(K); //set the number of clusters
     
     //measure running time for getting Dc and change the unit to millisecond
-    clock_gettime(CLOCK_MONOTONIC, &t_startDc);
     dpc.findDcPos(percents);
     clock_gettime(CLOCK_MONOTONIC, &t_endDc);
     timeDc = 1000000*(t_endDc.tv_sec-t_startDc.tv_sec)+(t_endDc.tv_nsec-t_startDc.tv_nsec)/1000; 
@@ -96,6 +99,7 @@ int main(int argc, char** argv)
     printf("Dc took %lf ms\n", timeDc / 1000.0);
     printf("Rho took %lf ms\n", timeRhoDelta / 1000.0);
     printf("Halo took %lf ms\n", timeHalo / 1000.0);
+    cout<<num_recomp<<" "<<num_remain<<endl;
 
     return 0;
 }

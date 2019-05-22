@@ -20,8 +20,18 @@ int main(int argc, char** argv)
     int K = atoi(argv[3]);
     int P = atoi(argv[4]);
 
+    timespec t_start, t_end;
+    clock_gettime(CLOCK_MONOTONIC, &t_start);
+
+    timespec t_startRho, t_endRho, t_startDelta, t_endDelta, t_startHalo, t_endHalo;
+    timespec t_startDc, t_endDc;                   //for the measurement of time spent on getting Dc
+	long timedifRho = 0, timedifDelta = 0, timedifHalo = 0, timedifDc = 0;
+
     DPC dpc(N);
+    clock_gettime(CLOCK_MONOTONIC, &t_startDc);
     dpc.readDist(file);
+    clock_gettime(CLOCK_MONOTONIC, &t_endDc);
+    timedifDc = 1000000*(t_endDc.tv_sec-t_startDc.tv_sec)+(t_endDc.tv_nsec-t_startDc.tv_nsec)/1000;
     dpc.setK(K);
 
     if(strcmp(argv[5], "True") == 0)
@@ -39,11 +49,6 @@ int main(int argc, char** argv)
         percents.push_back(1 + i / P * 4);
     //vector<double> percents = {0.5};
 
-    timespec t_start, t_end;
-    clock_gettime(CLOCK_MONOTONIC, &t_start);
-
-    timespec t_startRho, t_endRho, t_startDelta, t_endDelta, t_startHalo, t_endHalo;
-	long timedifRho = 0, timedifDelta = 0, timedifHalo = 0;
     for(int i = 0; i < percents.size(); i++)
     {
         dpc.setPercent(percents[i]);
@@ -72,6 +77,7 @@ int main(int argc, char** argv)
     clock_gettime(CLOCK_MONOTONIC, &t_end);
 	long timedif = 1000000*(t_end.tv_sec-t_start.tv_sec)+(t_end.tv_nsec-t_start.tv_nsec)/1000;
     printf("it took %lf ms\n", timedif / 1000.0);
+    printf("Dc took %lf ms\n", timedifDc / 1000.0);
     printf("Rho took %lf ms\n", timedifRho / 1000.0);
     printf("Delta took %lf ms\n", timedifDelta / 1000.0);
     printf("Halo took %lf ms\n", timedifHalo / 1000.0);

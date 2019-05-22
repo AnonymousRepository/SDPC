@@ -16,10 +16,10 @@ class DPC
 {
     int N; //the number of points
     int K; //the number of clusters;
-    int nDist; //the number of distances in the input file
-    int nDistLessDc; //the number of distances in the input file less than dc
-    int prevNDistLessDc; //nDistLessDc for last percent value
-    vector<vector<double>> dist; //distance btw two points
+    long long nDist; //the number of distances in the input file
+    long long nDistLessDc; //the number of distances in the input file less than dc
+    long long prevNDistLessDc; //nDistLessDc for last percent value
+    //vector<vector<double>> dist; //distance btw two points
     vector<pair<double, pair<int, int>>> distList; //list of all distances
     vector<pair<double, pair<int, int>>> omitted_dist; //for distances hava same value with the dc which are omitted from current iteration \
     but will be used in the next iteration.
@@ -27,7 +27,7 @@ class DPC
     double dc; //cut-off distance
     vector<double> rho; //local density of each point
     vector<double> delta; //the distance to the nearest data point of higher density 
-    vector<int> ndp; //the nearest data point of higher density
+    vector<int> ndp_h; //the nearest data point of higher density
     vector<int> q; //index corresponding to sorted rho
     vector<double> gamma; //gammas
     vector<int> ordgamma; //index corresponding to sorted gamma
@@ -35,15 +35,18 @@ class DPC
     vector<int> icl; //index of cluster center
     vector<int> halo; //-1 means halo, otherwise indicating which cluster it is in
     vector<double> bord_rho; //border density threshold for each cluster
-    vector<vector<int>> nb; //neighbor list for every point with points within one dc
+    vector<vector<pair<int, double>>> nb; //neighbor list (with corresponding distances) for every point with points within one dc 
     vector<vector<int>> nbS; //list of neighbor size of each data point under different dc
     vector<double> dcs; //contain all the dc that has been calculated
     int nTrial; //indicating which trail is running
+    vector<vector<double>> points; //all data points in the dataset
+    int dim; //the dimension of data points
+    vector<pair<int, double>> ndp; //the nearest data point for each data point with distance
 
 public:
     DPC(int n);
     //read distances from input file to dist and distList
-    void readDist(string fileName); 
+    void readDist(string fileName, double maxPerct, string fileName2);
     //set the percentage to be tested 
     void setPercent(double Pct);
     //get current dc
@@ -76,5 +79,9 @@ public:
     void printClusterAssignment();
     //output the decision graph, so that users can draw the graph use gnuplot
     void outputDecisionGraph();
+    //calculate eulidean distance between two data points
+    double CalDist(int idx1, int idx2);
+    //set the dimension of data points
+    void setDim(int d);
 };
 #endif

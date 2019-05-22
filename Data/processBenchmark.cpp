@@ -54,8 +54,6 @@ int main(int argc, char** argv)
             out<<i + 1<<" "<<j + 1<<" "<<
             sqrt(dist)<<endl;
         }
-            
-            
     }
     out.close();
     return 0;

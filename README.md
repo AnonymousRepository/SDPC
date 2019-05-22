@@ -1,32 +1,32 @@
 <p align="center">
-  <img src="DPC-Express_logo.png" alt="drawing" width="384" />
+  <img src="SDPC_logo.png" alt="drawing" width="320" />
 </p>
 
 # DPC-Express
-This is an implementation of DPC Express, which is an optimization algorithm for Density Peack Clustering (DPC) algorithm<sup>1</sup>. It accelerates DPC during tuning by removing redundant calculations while it preserves the same output as DPC. The details about DPC Express are described in the paper:
+This is an implementation of SDPC, which is an optimization algorithm for Density Peack Clustering (DPC) algorithm<sup>1</sup>. It consistently accelerates DPC during tuning by removing redundant calculations and reduces memory consumption via stream-style data process. In the meanwhile, it preserves the same semantic of DPC and thus the same output as DPC does. The details about SDPC are described in the paper:
 
-Lower the Final Barrier: Optimizing Hyperparameter Tuning for Density Peak Clustering
+Streamline Density Peak Clustering for Practical Adoptions
 
 Organization of the repo:
 
-* [DPC.cpp] - The main cpp source file for DPC Express
-* [DPC.h] - The header file for DPC Express
-* [main.cpp] - Sample test file for DPC Express
+* [DPC.cpp] - The main cpp source file for SDPC
+* [DPC.h] - The header file for SDPC
+* [main.cpp] - Sample test file for SDPC
 * [Data] - Datasets as well as codes to convert vector-based dataset to DPC-compatible input
 * [Original] - source files for original DPC
 
 More descriptions about the _Data_ folder and the _Original_ folder please refer to the _readme_ in them.
 
-## Compile DPC Express
+## Compile SDPC
 ```Bash
 make
 ```
 
-## Run DPC Express
+## Run SDPC
 ```Bash
-./DPC_Express data-file number-of-data-point number-of-clusters number-of-dc output-clustering-results: True or False output-decision-graphs: True or False
+./SDPC data-file-of-distances number-of-data-point number-of-clusters number-of-dc output-clustering-results: True or False output-decision-graphs: True or False data-file-of-data points dimension-of-data-point
 
-(e.g. ./DPC_Express Data/elliptical_10_2.data 500 10 16 False False)
+(e.g. ./SDPC Data/elliptical_10_2.rawData.data 500 10 16 False False Data/elliptical_10_2.rawData 2)
 ```
 Current version does not provide parameters to specify the range of percentage to be tested, the default setting is from 1% to 5%. Users can manually change codes in _main.cpp_ if other ranges are needed to covered. 
 
